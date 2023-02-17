@@ -12,3 +12,12 @@ class Registration(db.Model):
     
     def __repr__(self):
         return '<User {}>'.format(self.username)
+    def validate_email(self, email):
+	    user = Registration.query.filter_by(email = email.data).first()
+	    if user is not None:
+		    raise ValidationError('Please use a different email address')
+    
+    def validate_username(self, username):
+	    user = Registration.query.filter_by(username = username.data).first()
+	    if user is not None:
+		    raise ValidationError('Please use a different email address')
